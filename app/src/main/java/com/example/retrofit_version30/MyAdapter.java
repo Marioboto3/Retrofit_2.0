@@ -10,7 +10,7 @@ import android.widget.TextView;
 import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
-    private List<Post> values;
+    private List<Track> values;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -29,7 +29,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         }
     }
 
-    public void add(int position, Post item) {
+    public void add(int position, Track item) {
         values.add(position, item);
         notifyItemInserted(position);
     }
@@ -40,7 +40,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public MyAdapter(List<Post> myDataset) {
+    public MyAdapter(List<Track> myDataset) {
         values = myDataset;
     }
 
@@ -63,9 +63,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, final int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        final Post post_in = values.get(position);
-        holder.txtHeader.setText(String.valueOf(post_in.getid()));
-        holder.txtFooter.setText(post_in.gettitle());
+        final Track track_in = values.get(position);
+        holder.txtHeader.setText(String.valueOf(track_in.getTitle()));
+        holder.txtFooter.setText(track_in.getSinger());
         holder.txtHeader.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {

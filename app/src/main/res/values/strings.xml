@@ -3,4 +3,10 @@
     <string name="action_settings">Settings</string>
     <string name="Title">Title:</string>
     <string name="ID">ID:</string>
+    <string name="añadir">Añadir/Editar</string>
+    <string name="Singer">Singer</string>
+    <string name="Singeer">Singer:</string>
+    <string name="EDIT">EDIT</string>
+    <string name="DELETE">DELETE</string>
+    <string name="RETURN">RETURN</string>
 </resources>
