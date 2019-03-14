@@ -24,6 +24,7 @@
         </activity>
 
         <activity android:name="InfoTrack"/>
+        <activity android:name=".PostTrack"/>
     </application>
 
 </manifest>

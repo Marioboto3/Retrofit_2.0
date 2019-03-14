@@ -6,8 +6,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class InfoTrack extends AppCompatActivity {
+
+    Retrofit retrofit = new Retrofit.Builder()
+            .baseUrl("http://147.83.7.203:8080/dsaApp/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
+    Tracks_API tracks_api = retrofit.create((Tracks_API.class));
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +41,7 @@ public class InfoTrack extends AppCompatActivity {
         }
         titulosong.setText(tit);
 
-        TextView idsong = findViewById(R.id.id_mostrar);
+        final TextView idsong = findViewById(R.id.id_mostrar);
         String id =  null;
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
@@ -61,6 +75,30 @@ public class InfoTrack extends AppCompatActivity {
                 Intent intent = new Intent();
                 setResult(RESULT_OK, intent);
                 finish();
+            }
+        });
+
+        Button delete = findViewById(R.id.delete);
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Call<String> call = tracks_api.deleteTrack(idsong.getText().toString());
+                call.enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        Toast toast =
+                                Toast.makeText(getApplicationContext(),
+                                        "Se ha añadido correctamente.", Toast.LENGTH_SHORT);
+                        toast.show();
+                        Intent myIntent = new Intent(InfoTrack.this, MainActivity.class);
+                        startActivity(myIntent);
+                    }
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+
+                    }
+                });
+
             }
         });
 

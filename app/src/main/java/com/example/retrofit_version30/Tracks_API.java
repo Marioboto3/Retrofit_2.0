@@ -5,6 +5,7 @@ import java.util.List;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 
@@ -14,5 +15,8 @@ public interface Tracks_API {
     Call<List<Track>> getTracks();
 
     @POST()
-    Call<Track> postTrack (@Body RequestBody requestBody);
+    Call<Track> postTrack (@Body Track track);
+
+    @DELETE()
+    Call<String> deleteTrack (@Body String id);
 }

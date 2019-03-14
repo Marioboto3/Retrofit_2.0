@@ -1,5 +1,6 @@
 package com.example.retrofit_version30;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -35,12 +36,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends AppCompatActivity {
     List<Track> listDatos = new ArrayList<>();
     RecyclerView recycler;
-    TextView textView_result;
     RecyclerView.Adapter mAdapter;
-    String TitleString=null;
-    String IdString = null;
-    String SingerString =null;
 
+    Retrofit retrofit = new Retrofit.Builder()
+            .baseUrl("http://147.83.7.203:8080/dsaApp/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
+    Tracks_API tracks_api = retrofit.create((Tracks_API.class));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent myIntent = new Intent(MainActivity.this, PostTrack.class);
+                startActivity(myIntent);
             }
         });
 
@@ -59,22 +63,7 @@ public class MainActivity extends AppCompatActivity {
         recycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recycler.setHasFixedSize(true);
 
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient client = new OkHttpClient.Builder()
-                .addInterceptor(interceptor)
-                .build();
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://147.83.7.203:8080/dsaApp/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(client)
-                .build();
-
-        Tracks_API tracks_api = retrofit.create((Tracks_API.class));
-
         Call<List<Track>> call = tracks_api.getTracks();
-
         call.enqueue(new Callback<List<Track>>() {
             @Override
             public void onResponse(Call<List<Track>> call, Response<List<Track>> response) {
@@ -86,11 +75,6 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
                 listDatos = response.body();
-                Track track;
-                track= listDatos.get(0);
-                TitleString=track.getTitle();
-                IdString=track.getId();
-                SingerString=track.getSinger();
 
                 mAdapter = new MyAdapter(listDatos, MainActivity.this);
                 recycler.setAdapter(mAdapter);
