@@ -13,14 +13,27 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.39">
+        app:layout_constraintVertical_bias="0.0">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_blue_bright"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:title="@string/INFORMATION"
+            app:titleTextColor="@color/colorAccent" />
 
         <TextView
             android:id="@+id/title"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:gravity="center"
             android:text="@string/Title"
             android:textColor="@android:color/holo_blue_bright"
             android:textColorLink="@color/colorPrimaryDark"
@@ -31,13 +44,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="26dp"
-            android:text="TextView" />
+            android:gravity="center"
+            android:text="TextView"
+            android:textColor="@color/colorPrimary" />
 
         <TextView
             android:id="@+id/Singer"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="26dp"
+            android:gravity="center"
             android:text="@string/Singeer"
             android:textColor="@android:color/holo_blue_bright"
             android:textSize="36sp" />
@@ -47,13 +63,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="26dp"
-            android:text="TextView" />
+            android:gravity="center"
+            android:text="TextView"
+            android:textColor="@color/colorPrimary" />
 
         <TextView
             android:id="@+id/ID"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="0dp"
             android:layout_marginTop="26dp"
+            android:gravity="center"
             android:text="@string/ID"
             android:textColor="@android:color/holo_blue_bright"
             android:textSize="36sp" />
@@ -63,37 +83,31 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="26dp"
-            android:text="TextView" />
+            android:gravity="center"
+            android:text="TextView"
+            android:textColor="@color/colorPrimary" />
 
-        <TableRow
-            android:id="@+id/row"
+        <Button
+            android:id="@+id/delete"
+            android:layout_width="61dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="175dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/ic_stat_deleteblue"
+            android:backgroundTint="@color/ic_launcher_background"
+            android:text="@string/DELETE" />
+
+        <Button
+            android:id="@+id/atras"
+            style="@android:style/Widget.Material.Light.Button.Toggle"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="300dp"
             android:layout_marginTop="100dp"
-            android:layout_marginBottom="200dp">
+            android:text="@string/RETURN"
+            android:textColor="@color/colorAccent" />
 
-            <Button
-                android:id="@+id/button"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:text="@string/EDIT" />
 
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="60dp"
-                android:text="@string/DELETE" />
-
-            <Button
-                android:id="@+id/button3"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="60dp"
-                android:layout_marginRight="0dp"
-                android:text="@string/RETURN" />
-        </TableRow>
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

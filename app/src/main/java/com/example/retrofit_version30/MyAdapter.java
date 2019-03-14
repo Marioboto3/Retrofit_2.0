@@ -1,5 +1,7 @@
 package com.example.retrofit_version30;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +13,7 @@ import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private List<Track> values;
+    Activity activity;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -28,7 +31,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             txtFooter =  v.findViewById(R.id.secondLine);
         }
     }
-
     public void add(int position, Track item) {
         values.add(position, item);
         notifyItemInserted(position);
@@ -40,8 +42,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public MyAdapter(List<Track> myDataset) {
+    public MyAdapter(List<Track> myDataset, Activity activity) {
         values = myDataset;
+        this.activity=activity;
     }
 
     // Create new views (invoked by the layout manager)
@@ -60,7 +63,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         final Track track_in = values.get(position);
@@ -69,7 +72,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         holder.txtHeader.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                remove(position);
+                Intent myIntent = new Intent((activity.getApplicationContext()), InfoTrack.class);
+                myIntent.putExtra("Title",track_in.getTitle());
+                myIntent.putExtra("Id",track_in.getId());
+                myIntent.putExtra("Singer", track_in.getSinger());
+                activity.startActivity(myIntent);
             }
         });
     }

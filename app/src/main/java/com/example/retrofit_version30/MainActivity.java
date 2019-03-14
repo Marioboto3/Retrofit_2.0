@@ -9,9 +9,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,7 +21,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,6 +37,10 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recycler;
     TextView textView_result;
     RecyclerView.Adapter mAdapter;
+    String TitleString=null;
+    String IdString = null;
+    String SingerString =null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,23 +49,15 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
-
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
             }
         });
 
-        textView_result = findViewById(R.id.firstLine);
         recycler = findViewById(R.id.my_recycler_view);
         recycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recycler.setHasFixedSize(true);
-
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .readTimeout(60, TimeUnit.SECONDS)
-                .writeTimeout(60, TimeUnit.SECONDS)
-                .connectTimeout(60, TimeUnit.SECONDS)
-                .build();
 
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -70,7 +71,8 @@ public class MainActivity extends AppCompatActivity {
                 .client(client)
                 .build();
 
-        Tracks_API tracks_api =retrofit.create((Tracks_API.class));
+        Tracks_API tracks_api = retrofit.create((Tracks_API.class));
+
         Call<List<Track>> call = tracks_api.getTracks();
 
         call.enqueue(new Callback<List<Track>>() {
@@ -84,8 +86,13 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
                 listDatos = response.body();
+                Track track;
+                track= listDatos.get(0);
+                TitleString=track.getTitle();
+                IdString=track.getId();
+                SingerString=track.getSinger();
 
-                mAdapter = new MyAdapter(listDatos);
+                mAdapter = new MyAdapter(listDatos, MainActivity.this);
                 recycler.setAdapter(mAdapter);
             }
 
@@ -120,6 +127,6 @@ public class MainActivity extends AppCompatActivity {
 
             return super.onOptionsItemSelected(item);
         }
-
     }
+
 
