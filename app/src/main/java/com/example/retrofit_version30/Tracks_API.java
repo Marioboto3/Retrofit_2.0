@@ -8,15 +8,16 @@ import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public interface Tracks_API {
 
     @GET("tracks")
     Call<List<Track>> getTracks();
 
-    @POST()
+    @POST("tracks")
     Call<Track> postTrack (@Body Track track);
 
-    @DELETE()
-    Call<String> deleteTrack (@Body String id);
+    @DELETE("tracks/{id}")
+    Call<Void> deleteTrack (@Path("id") String id);
 }

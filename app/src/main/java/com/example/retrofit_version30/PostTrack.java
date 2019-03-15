@@ -21,15 +21,18 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class PostTrack extends AppCompatActivity {
 
-    Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("http://147.83.7.203:8080/dsaApp/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build();
-    Tracks_API tracks_api = retrofit.create((Tracks_API.class));
+    private Tracks_API tracks_api;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.post_main);
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://147.83.7.203:8080/dsaApp/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        tracks_api = retrofit.create((Tracks_API.class));
 
         Button post = findViewById(R.id.post);
         final EditText titulo = findViewById(R.id.titulo_escrito);
@@ -41,15 +44,20 @@ public class PostTrack extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                final Track track=null;
-                track.setId(id.toString());
-                track.setSinger(cantante.toString());
-                track.setTitle(titulo.toString());
+                final Track track = new Track(id.getText().toString(),cantante.getText().toString(),titulo.getText().toString());
 
                 Call<Track> call = tracks_api.postTrack(track);
                 call.enqueue(new Callback<Track>() {
                     @Override
                     public void onResponse(Call<Track> call, Response<Track> response) {
+                        if(!response.isSuccessful()){
+                            Toast toast =
+                                    Toast.makeText(getApplicationContext(),
+                                            "Rosamelano", Toast.LENGTH_SHORT);
+                            toast.show();
+                            return;
+                        }
+
                         Toast toast =
                                 Toast.makeText(getApplicationContext(),
                                         "Se ha añadido correctamente.", Toast.LENGTH_SHORT);
@@ -63,7 +71,6 @@ public class PostTrack extends AppCompatActivity {
 
                     }
                 });
-
             }
         });
     }

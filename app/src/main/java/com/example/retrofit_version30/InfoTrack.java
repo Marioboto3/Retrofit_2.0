@@ -82,10 +82,10 @@ public class InfoTrack extends AppCompatActivity {
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Call<String> call = tracks_api.deleteTrack(idsong.getText().toString());
-                call.enqueue(new Callback<String>() {
+                Call<Void> call = tracks_api.deleteTrack(idsong.getText().toString());
+                call.enqueue(new Callback<Void>() {
                     @Override
-                    public void onResponse(Call<String> call, Response<String> response) {
+                    public void onResponse(Call<Void> call, Response<Void> response) {
                         Toast toast =
                                 Toast.makeText(getApplicationContext(),
                                         "Se ha añadido correctamente.", Toast.LENGTH_SHORT);
@@ -94,7 +94,7 @@ public class InfoTrack extends AppCompatActivity {
                         startActivity(myIntent);
                     }
                     @Override
-                    public void onFailure(Call<String> call, Throwable t) {
+                    public void onFailure(Call<Void> call, Throwable t) {
 
                     }
                 });
