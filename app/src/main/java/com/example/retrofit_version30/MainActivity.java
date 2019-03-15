@@ -74,6 +74,10 @@ public class MainActivity extends AppCompatActivity {
                     toast1.show();
                     return;
                 }
+                Toast tostaito =
+                        Toast.makeText(getApplicationContext(),
+                                "Toast malo", Toast.LENGTH_SHORT);
+                tostaito.show();
                 listDatos = response.body();
 
                 mAdapter = new MyAdapter(listDatos, MainActivity.this);

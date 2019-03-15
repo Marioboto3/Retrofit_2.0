@@ -41,22 +41,23 @@ public class PostTrack extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                final Track track=null;
-                track.setId(id.toString());
-                track.setSinger(cantante.toString());
-                track.setTitle(titulo.toString());
+                final Track track = new Track(id.getText().toString(),cantante.getText().toString(),titulo.getText().toString());
 
                 Call<Track> call = tracks_api.postTrack(track);
                 call.enqueue(new Callback<Track>() {
                     @Override
                     public void onResponse(Call<Track> call, Response<Track> response) {
-                        Toast toast =
-                                Toast.makeText(getApplicationContext(),
-                                        "Se ha añadido correctamente.", Toast.LENGTH_SHORT);
-                        toast.show();
-                        Intent myIntent = new Intent(PostTrack.this, MainActivity.class);
-                        startActivity(myIntent);
+                        if (!response.isSuccessful()) {
 
+                            Toast toast =
+                                    Toast.makeText(getApplicationContext(),
+                                            response.code(), Toast.LENGTH_SHORT);
+                            toast.show();
+                        }
+                        else {
+                            Intent myIntent = new Intent(PostTrack.this, MainActivity.class);
+                            startActivity(myIntent);
+                        }
                     }
                     @Override
                     public void onFailure(Call<Track> call, Throwable t) {
