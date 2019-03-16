@@ -11,4 +11,6 @@
     <string name="RETURN">RETURN</string>
     <string name="INFORMATION">INFORMATION</string>
     <string name="post">POST</string>
+    <string name="edit">EDIT</string>
+    <string name="delete">delete</string>
 </resources>

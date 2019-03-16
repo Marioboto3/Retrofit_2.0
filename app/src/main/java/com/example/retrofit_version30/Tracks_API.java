@@ -8,6 +8,7 @@ import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface Tracks_API {
@@ -18,6 +19,9 @@ public interface Tracks_API {
     @POST("tracks")
     Call<Track> postTrack (@Body Track track);
 
-    @DELETE()
+    @DELETE("tracks/{id}")
     Call<Void> deleteTrack (@Path("id") String id);
+
+    @PUT("tracks")
+    Call<Void> putTrack(@Body Track track);
 }

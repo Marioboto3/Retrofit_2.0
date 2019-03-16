@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 Toast tostaito =
                         Toast.makeText(getApplicationContext(),
-                                "Toast malo", Toast.LENGTH_SHORT);
+                                "Lista de tracks obtenida.", Toast.LENGTH_SHORT);
                 tostaito.show();
                 listDatos = response.body();
 

@@ -34,9 +34,4 @@ public class Track {
         this.singer = singer;
     }
 
-    public Track(String id, String title, String singer) {
-        this.id = id;
-        this.title = title;
-        this.singer = singer;
-    }
 }

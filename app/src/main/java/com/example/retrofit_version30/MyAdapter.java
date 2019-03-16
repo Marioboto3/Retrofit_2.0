@@ -35,12 +35,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         values.add(position, item);
         notifyItemInserted(position);
     }
-
     public void remove(int position) {
         values.remove(position);
         notifyItemRemoved(position);
     }
-
     // Provide a suitable constructor (depends on the kind of dataset)
     public MyAdapter(List<Track> myDataset, Activity activity) {
         values = myDataset;
@@ -60,7 +58,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         ViewHolder vh = new ViewHolder(v);
         return vh;
     }
-
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {

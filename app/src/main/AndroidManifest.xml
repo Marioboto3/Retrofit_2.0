@@ -22,7 +22,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity android:name=".EditTrack"/>
         <activity android:name="InfoTrack"/>
         <activity android:name=".PostTrack"/>
     </application>

@@ -41,7 +41,7 @@ public class PostTrack extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                final Track track = new Track(id.getText().toString(),cantante.getText().toString(),titulo.getText().toString());
+                final Track track = new Track(id.getText().toString(),titulo.getText().toString(),cantante.getText().toString());
 
                 Call<Track> call = tracks_api.postTrack(track);
                 call.enqueue(new Callback<Track>() {

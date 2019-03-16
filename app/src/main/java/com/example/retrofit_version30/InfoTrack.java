@@ -69,42 +69,40 @@ public class InfoTrack extends AppCompatActivity{
         }
         singersong.setText(sin);
 
-        Button next = findViewById(R.id.atras);
-        next.setOnClickListener(new View.OnClickListener() {
+        Button delete = findViewById(R.id.atras);
+        delete.setOnClickListener(new View.OnClickListener() {
                                     public void onClick(View view) {
-                                        Intent intent = new Intent();
-                                        setResult(RESULT_OK, intent);
-                                        finish();
+                                        Call<Void> call = tracks_api.deleteTrack(idsong.getText().toString());
+                                        call.enqueue(new Callback<Void>() {
+                                            @Override
+                                            public void onResponse(Call<Void> call, Response<Void> response) {
+                                                if(!response.isSuccessful()) {
+                                                    Toast toast = Toast.makeText(getApplicationContext(),
+                                                            "Error: "+response.code(),
+                                                            Toast.LENGTH_SHORT);
+                                                    toast.show();
+                                                    return;
+                                                }
+                                                Intent myIntent = new Intent(InfoTrack.this, MainActivity.class);
+                                                startActivity(myIntent);
+                                            }
+
+                                            @Override
+                                            public void onFailure(Call<Void> call, Throwable t) {
+                                                Toast toast = Toast.makeText(getApplicationContext(),
+                                                        "La comunicación con el servidor ha fallado.",
+                                                        Toast.LENGTH_SHORT);
+                                                toast.show();
+                                            }
+                                        });
                                     }
                                 });
-
-        Button delete = findViewById(R.id.delete);
-        delete.setOnClickListener(new View.OnClickListener()
-            {
-                @Override
-                public void onClick (View v){
-                Call<Void> call = tracks_api.deleteTrack(idsong.getText().toString());
-                call.enqueue(new Callback<Void>() {
-                    @Override
-                    public void onResponse(Call<Void> call, Response<Void> response) {
-                        if(!response.isSuccessful()) {
-                            Toast toast = Toast.makeText(getApplicationContext(),
-                                    "Error: "+response.code(),
-                                    Toast.LENGTH_SHORT);
-                            toast.show();
-                            return;
-                        }
-                        Toast toast =
-                                Toast.makeText(getApplicationContext(),
-                                        "Se ha borrado correctamente.", Toast.LENGTH_SHORT);
-                        toast.show();
-                    }
-
-                    @Override
-                    public void onFailure(Call<Void> call, Throwable t) {
-
-                    }
-                });
+        Button edit = findViewById(R.id.edit);
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(InfoTrack.this, EditTrack.class);
+                startActivity(myIntent);
             }
         });
     }
