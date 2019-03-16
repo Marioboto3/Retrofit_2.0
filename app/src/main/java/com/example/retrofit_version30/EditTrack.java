@@ -25,13 +25,26 @@ public class EditTrack extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_layout);
 
+
         Button edit = findViewById(R.id.edit);
-        EditText id_1 = findViewById(R.id.id_mostrar2);
         EditText title_1 = findViewById(R.id.titulo_mostrar2);
         EditText cantante_1 = findViewById(R.id.singer_mostrar2);
-
-
-        final Track track = new Track(id_1.getText().toString(),title_1.getText().toString(),cantante_1.getText().toString());
+        String id =  null;
+        if (savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            if(extras == null) {
+                id= null;
+            } else {
+                id=extras.getString("Id");
+            }
+        } else {
+            id =(String) savedInstanceState.getSerializable("Id");
+        }
+        Toast toast = Toast.makeText(getApplicationContext(),
+                id+"holaaa",
+                Toast.LENGTH_SHORT);
+        toast.show();
+        final Track track = new Track(id,title_1.getText().toString(),cantante_1.getText().toString());
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

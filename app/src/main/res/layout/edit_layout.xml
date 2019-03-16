@@ -70,27 +70,6 @@
             android:text=""
             android:textColor="@color/colorAccent" />
 
-        <TextView
-            android:id="@+id/ID"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="0dp"
-            android:layout_marginTop="26dp"
-            android:gravity="center"
-            android:text="@string/ID"
-            android:textColor="@android:color/holo_blue_bright"
-            android:textSize="36sp" />
-
-        <EditText
-            android:id="@+id/id_mostrar2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="26dp"
-            android:background="@color/ic_launcher_background"
-            android:gravity="center"
-            android:text=""
-            android:textColor="@color/colorAccent" />
-
         <Button
             android:id="@+id/edit"
             android:layout_width="wrap_content"

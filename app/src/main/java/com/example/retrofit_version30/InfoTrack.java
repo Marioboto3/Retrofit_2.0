@@ -102,6 +102,7 @@ public class InfoTrack extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(InfoTrack.this, EditTrack.class);
+                myIntent.putExtra("Id",idsong.getText().toString());
                 startActivity(myIntent);
             }
         });
