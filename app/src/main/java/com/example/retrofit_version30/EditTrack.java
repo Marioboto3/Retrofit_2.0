@@ -27,8 +27,8 @@ public class EditTrack extends AppCompatActivity {
 
 
         Button edit = findViewById(R.id.edit);
-        EditText title_1 = findViewById(R.id.titulo_mostrar2);
-        EditText cantante_1 = findViewById(R.id.singer_mostrar2);
+        final EditText title_1 = findViewById(R.id.titulo_mostrar2);
+        final EditText cantante_1 = findViewById(R.id.singer_mostrar2);
         String id =  null;
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
@@ -40,14 +40,12 @@ public class EditTrack extends AppCompatActivity {
         } else {
             id =(String) savedInstanceState.getSerializable("Id");
         }
-        Toast toast = Toast.makeText(getApplicationContext(),
-                id+"holaaa",
-                Toast.LENGTH_SHORT);
-        toast.show();
-        final Track track = new Track(id,title_1.getText().toString(),cantante_1.getText().toString());
+
+        final String idtrack=id;
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                final Track track = new Track(idtrack,title_1.getText().toString(),cantante_1.getText().toString());
                 Call<Void> call = tracks_api.putTrack(track);
                 call.enqueue(new Callback<Void>() {
                     @Override
