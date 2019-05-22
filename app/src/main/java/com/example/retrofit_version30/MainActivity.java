@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView.Adapter mAdapter;
 
     Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("http://147.83.7.203:8080/dsaApp/")
+            .baseUrl("http://10.192.42.69:8080/dsaApp/")
             .addConverterFactory(GsonConverterFactory.create())
             .build();
     Tracks_API tracks_api = retrofit.create((Tracks_API.class));

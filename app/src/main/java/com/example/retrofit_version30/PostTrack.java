@@ -22,7 +22,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class PostTrack extends AppCompatActivity {
 
     Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("http://147.83.7.203:8080/dsaApp/")
+            .baseUrl("http://10.192.42.69:8080/dsaApp/")
             .addConverterFactory(GsonConverterFactory.create())
             .build();
     Tracks_API tracks_api = retrofit.create((Tracks_API.class));
@@ -43,7 +43,7 @@ public class PostTrack extends AppCompatActivity {
 
                 final Track track = new Track(id.getText().toString(),titulo.getText().toString(),cantante.getText().toString());
 
-                Call<Track> call = tracks_api.postTrack(track);
+                    Call<Track> call = tracks_api.postTrack(track);
                 call.enqueue(new Callback<Track>() {
                     @Override
                     public void onResponse(Call<Track> call, Response<Track> response) {
